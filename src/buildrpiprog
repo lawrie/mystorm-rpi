@@ -1,0 +1,1 @@
+gcc -o rpiprog -Wall -Os rpiprog.c -lwiringPi -lrt -lstdc++ -lbcm2835
