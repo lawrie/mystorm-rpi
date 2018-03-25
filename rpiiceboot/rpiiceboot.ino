@@ -10,10 +10,6 @@ const byte bitstream[] = {
 #include "ice40bitstream.h"
 };
 
-const byte syncBytes[] = { 0x7E, 0xAA, 0x99, 0x7E };
-// Length of a bitstream file (excluding empty initial comment and marker)
-const int bitstreamBodyLength = 135100 - 8;
-
 bool configured;  // true if FPGA has been configured successfully
 
 void setup() {
@@ -50,7 +46,7 @@ void loop() {
         Serial1.println("Starting configure");
         digitalWrite(LED_BUILTIN, 1);
         if (myStorm.FPGAConfigure(Serial1)) {
-          Serial1.println("Configure sucessful");
+          Serial1.println("Configure succlsessful");
         } else {
           Serial1.println("Configure failed "); 
         }
