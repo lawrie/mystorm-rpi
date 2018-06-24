@@ -12,6 +12,8 @@
 #define CFG_DONE 6 
 #define CFG_S    1
 #define CFG_OE   3
+#define CFG_BOOT 4 
+#define CFG_NRST 2 
 
 int debug = 0;
 
@@ -47,9 +49,20 @@ int main(int argc, char **argv)
 	pinMode(CFG_S,    OUTPUT);
 	pinMode(CFG_OE,   OUTPUT);
         pinMode(CFG_SS,   OUTPUT);
+        pinMode(CFG_BOOT,   OUTPUT);
+        pinMode(CFG_NRST,   OUTPUT);
+
 
         //printf("DONE is %d\n", digitalRead(CFG_DONE));
         //fflush(stdout);
+
+	// Reboot the STM32
+	digitalWrite(CFG_BOOT, LOW);
+	digitalWrite(CFG_NRST, LOW);
+	usleep(100000);
+	digitalWrite(CFG_NRST, HIGH);
+	pinMode(CFG_BOOT, INPUT);
+	pinMode(CFG_NRST, INPUT);
 	
 	// Enable Mux and select RPi header
     	digitalWrite(CFG_S,   HIGH);
@@ -71,7 +84,7 @@ int main(int argc, char **argv)
 	
 	usleep(2000);
 
-	//int status = system("echo 'r' >/dev/ttyAMA0");
+	//int status = system("echo 'p' >/dev/ttyAMA0");
 	//printf("Result from sending reset command %d\n", status);
 	
 	//usleep(1000000);
